@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SetHome - Comandos</title>
+    <style>
+        body { font-family: sans-serif; background-color: #0f0f12; color: #e0e0e0; padding: 20px; }
+        .btn-volver { display: inline-block; padding: 10px 15px; background-color: #333; color: #fff; text-decoration: none; border-radius: 5px; margin-bottom: 20px; }
+        h1 { color: #00bcd4; }
+        table { width: 100%; border-collapse: collapse; margin-top: 20px; background-color: #16161f; }
+        th, td { padding: 12px; text-align: left; border-bottom: 1px solid #333; }
+        th { background-color: #00bcd4; color: white; }
+        code { color: #ffaa00; }
+    </style>
+</head>
+<body>
+    <a href="index.html" class="btn-volver">← Volver al Inicio</a>
+    <h1>🏠 SetHome</h1>
+    <p>Guarda la ubicación de tu casa o base para poder teletransportarte a ella de inmediato cuando estés explorando.</p>
+    
+    <h2>Lista de Comandos</h2>
+    <table>
+        <tr><th>Comando</th><th>Descripción Breve</th></tr>
+        <tr><td><code>/sethome [nombre]</code></td><td>Guarda tu ubicación actual como un hogar con el nombre que elijas.</td></tr>
+        <tr><td><code>/home [nombre]</code></td><td>Te teletransporta al hogar guardado con ese nombre.</td></tr>
+        <tr><td><code>/delhome [nombre]</code></td><td>Elimina por completo el hogar seleccionado.</td></tr>
+        <tr><td><code>/homes</code></td><td>Muestra una lista en el chat con los nombres de todas tus casas guardadas.</td></tr>
+        <tr><td><code>/sethome limit</code></td><td>Muestra cuántos hogares máximos tienes permitido crear según tu rango.</td></tr>
+        <tr><td><code>/sethome player [jugador] [casa]</code></td><td>(Admin) Teletransporta al administrador a la casa de un jugador específico.</td></tr>
+        <tr><td><code>/sethome reload</code></td><td>(Admin) Recarga los archivos de configuración de tiempos de espera (cooldowns).</td></tr>
+    </table>
+</body>
+</html>

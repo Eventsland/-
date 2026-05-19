@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Brewery - Comandos</title>
+    <style>
+        body { font-family: sans-serif; background-color: #0f0f12; color: #e0e0e0; padding: 20px; }
+        .btn-volver { display: inline-block; padding: 10px 15px; background-color: #333; color: #fff; text-decoration: none; border-radius: 5px; margin-bottom: 20px; }
+        h1 { color: #9c27b0; }
+        table { width: 100%; border-collapse: collapse; margin-top: 20px; background-color: #16161f; }
+        th, td { padding: 12px; text-align: left; border-bottom: 1px solid #333; }
+        th { background-color: #9c27b0; color: white; }
+        code { color: #ffaa00; }
+    </style>
+</head>
+<body>
+    <a href="index.html" class="btn-volver">← Volver al Inicio</a>
+    <h1>🍺 Brewery</h1>
+    <p>Crea un sistema de destilación realista. Fermenta ingredientes en calderos, destila el producto y déjalo envejecer en barriles.</p>
+    
+    <h2>Lista de Comandos</h2>
+    <table>
+        <tr><th>Comando</th><th>Descripción Breve</th></tr>
+        <tr><td><code>/brew info</code></td><td>Muestra los detalles y calidad de la bebida que tienes en la mano.</td></tr>
+        <tr><td><code>/brew unlabel</code></td><td>Remueve la etiqueta personalizada de una botella de alcohol.</td></tr>
+        <tr><td><code>/brew create [receta]</code></td><td>(Admin) Genera una bebida específica instantáneamente en tu mano.</td></tr>
+        <tr><td><code>/brew change [calidad]</code></td><td>(Admin) Modifica los niveles de calidad o añejamiento de la bebida sostenida.</td></tr>
+        <tr><td><code>/brew info [jugador]</code></td><td>(Admin) Muestra el nivel actual de borrachera de un jugador en el servidor.</td></tr>
+        <tr><td><code>/brew wake</code></td><td>(Admin) Teletransporta a un jugador mareado a un punto aleatorio de despertar.</td></tr>
+        <tr><td><code>/brew reload</code></td><td>(Admin) Recarga todas las recetas y configuraciones del plugin.</td></tr>
+    </table>
+</body>
+</html>

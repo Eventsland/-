@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ExcellentCrates - Comandos</title>
+    <style>
+        body { font-family: sans-serif; background-color: #0f0f12; color: #e0e0e0; padding: 20px; }
+        .btn-volver { display: inline-block; padding: 10px 15px; background-color: #333; color: #fff; text-decoration: none; border-radius: 5px; margin-bottom: 20px; }
+        h1 { color: #ff9800; }
+        table { width: 100%; border-collapse: collapse; margin-top: 20px; background-color: #16161f; }
+        th, td { padding: 12px; text-align: left; border-bottom: 1px solid #333; }
+        th { background-color: #ff9800; color: white; }
+        code { color: #ffaa00; }
+    </style>
+</head>
+<body>
+    <a href="index.html" class="btn-volver">← Volver al Inicio</a>
+    <h1>🎁 ExcellentCrates</h1>
+    <p>Crea cajas de recompensas con llaves para dar premios aleatorios, ítems épicos o dinero a los jugadores.</p>
+    
+    <h2>Lista de Comandos</h2>
+    <table>
+        <tr><th>Comando</th><th>Descripción Breve</th></tr>
+        <tr><td><code>/crates</code></td><td>Abre el menú principal con la lista de cajas disponibles.</td></tr>
+        <tr><td><code>/crates preview [caja]</code></td><td>Te permite ver de forma gráfica los premios que contiene una caja.</td></tr>
+        <tr><td><code>/crates key give [jugador] [caja] [cant]</code></td><td>(Admin) Otorga llaves de una caja específica a un jugador.</td></tr>
+        <tr><td><code>/crates key giveall [caja] [cant]</code></td><td>(Admin) Entrega llaves de una caja a todos los usuarios conectados.</td></tr>
+        <tr><td><code>/crates claim</code></td><td>Abre el inventario de recompensas pendientes por reclamar.</td></tr>
+        <tr><td><code>/crates setup</code></td><td>(Admin) Abre el menú de configuración interactivo para crear o editar cajas.</td></tr>
+        <tr><td><code>/crates reload</code></td><td>(Admin) Recarga el plugin y actualiza los porcentajes de premios.</td></tr>
+    </table>
+</body>
+</html>

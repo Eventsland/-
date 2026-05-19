@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shopkeepers - Comandos</title>
+    <style>
+        body { font-family: sans-serif; background-color: #0f0f12; color: #e0e0e0; padding: 20px; }
+        .btn-volver { display: inline-block; padding: 10px 15px; background-color: #333; color: #fff; text-decoration: none; border-radius: 5px; margin-bottom: 20px; }
+        h1 { color: #8bc34a; }
+        table { width: 100%; border-collapse: collapse; margin-top: 20px; background-color: #16161f; }
+        th, td { padding: 12px; text-align: left; border-bottom: 1px solid #333; }
+        th { background-color: #8bc34a; color: black; font-weight: bold; }
+        code { color: #ffaa00; }
+    </style>
+</head>
+<body>
+    <a href="index.html" class="btn-volver">← Volver al Inicio</a>
+    <h1>🛒 Shopkeepers</h1>
+    <p>Crea aldeanos comerciantes totalmente personalizados. Configura qué ítems piden y qué recompensas entregan a los jugadores.</p>
+    
+    <h2>Lista de Comandos</h2>
+    <table>
+        <tr><th>Comando</th><th>Descripción Breve</th></tr>
+        <tr><td><code>/shopkeeper [tipo]</code></td><td>Crea un comerciante en tu ubicación (ej: villager, sign, witch, etc.).</td></tr>
+        <tr><td><code>/shopkeeper remote [nombre]</code></td><td>Abre de forma remota el inventario de edición de uno de tus aldeanos.</td></tr>
+        <tr><td><code>/shopkeeper remove</code></td><td>Elimina al comerciante que estés mirando directamente.</td></tr>
+        <tr><td><code>/shopkeeper list</code></td><td>Muestra una lista con las coordenadas de todos tus comerciantes activos.</td></tr>
+        <tr><td><code>/shopkeeper debug</code></td><td>(Admin) Activa el modo de depuración para revisar errores del plugin.</td></tr>
+        <tr><td><code>/shopkeeper reload</code></td><td>(Admin) Recarga la configuración del plugin y los tipos de comerciantes permitidos.</td></tr>
+    </table>
+</body>
+</html>

@@ -1,0 +1,44 @@
+{
+  "creadores": [
+    {
+      "id": "destruyealmas35",
+      "nombre": "Destruyealmas35",
+      "red_social_link": "https://youtube.com/@destruyealmas35",
+      "donde_verlo": "YouTube (@destruyealmas35)",
+      "biografia": "Admin Supremo del servidor y creador principal del reino de EventsLand.",
+      "rango_server": "Admin Supremo 👑",
+      "rango_grupo": "Fundador",
+      "rango_donador": "Ninguno",
+      "info_extra": "Adicto a los desafíos técnicos y creador de este mundo mitológico."
+    },
+    {
+      "id": "creador_ejemplo",
+      "nombre": "Nuevo Creador",
+      "red_social_link": "https://youtube.com/@ejemplo",
+      "donde_verlo": "YouTube Live",
+      "biografia": "Sube streams divertidos del server todos los fines de semana.",
+      "rango_server": "Creador 🎥",
+      "rango_grupo": "Miembro VIP",
+      "rango_donador": "Aventurero",
+      "info_extra": "¡Síganlo para participar en sorteos de llaves místicas!"
+    }
+  ],
+  "donadores": [
+    {
+      "id": "donador1",
+      "nombre": "Donador Legendario",
+      "foto_link": "https://i.postimg.cc/m26v6N9X/skin1.png",
+      "biografia": "Primer gran aportador del servidor. Ayudó a financiar el host inicial.",
+      "links": "Discord: @leyenda",
+      "info_extra": "Posee el rango Dios en el juego."
+    },
+    {
+      "id": "donador2",
+      "nombre": "Aventurero Anónimo",
+      "foto_link": "https://i.postimg.cc/Xv4xX66y/skin2.png",
+      "biografia": "Apoya mensualmente para mantener el servidor sin lag.",
+      "links": "No especificado",
+      "info_extra": "Amante de la destilación en Brewery."
+    }
+  ]
+}

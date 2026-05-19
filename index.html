@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EVENTSLAND - Servidor de Minecraft</title>
+    <style>
+        :root {
+            --bg-color: #060608;
+            --card-bg: #0d0d13;
+            --primary: #ff0033;
+            --primary-glow: rgba(255, 0, 51, 0.6);
+            --whatsapp: #25D366;
+            --discord: #5865F2;
+            --kofi: #FF5E5B;
+            --legendary: #ffaa00;
+            --epic: #aa00aa;
+            --good: #00aaaa;
+        }
+
+        body {
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg-color);
+            background-image: radial-gradient(circle at 50% 50%, #150508 0%, #060608 100%);
+            color: #e5e5e5;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+            overflow-x: hidden;
+        }
+
+        /* 👁️ CABECERA MÍSTICA DE OCULTISMO */
+        .header-epic {
+            background: linear-gradient(180deg, rgba(255, 0, 51, 0.15) 0%, rgba(6, 6, 8, 0) 100%);
+            padding: 60px 20px 40px;
+            position: relative;
+        }
+        
+        /* Ojo central decorativo de fondo */
+        .header-epic::before {
+            content: "👁️";
+            position: absolute;
+            top: 15px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 2.5rem;
+            color: var(--primary);
+            opacity: 0.3;
+            animation: eyePulse 4s infinite ease-in-out;
+        }
+
+        .header-epic h1 {
+            font-size: 3.8rem;
+            margin: 0 0 10px 0;
+            font-weight: 900;
+            letter-spacing: 10px;
+            color: #ffffff;
+            text-shadow: 0 0 15px var(--primary-glow), 0 0 30px rgba(255, 0, 51, 0.3);
+            animation: fireGlow 3s infinite alternate ease-in-out;
+        }
+
+        @keyframes fireGlow {
+            from { text-shadow: 0 0 15px var(--primary-glow), 0 0 30px rgba(255, 0, 51, 0.2); }
+            to { text-shadow: 0 0 25px var(--primary), 0 0 40px rgba(255, 0, 51, 0.5); }
+        }
+        
+        @keyframes eyePulse {
+            0%, 100% { transform: translateX(-50%) scale(1); opacity: 0.2; filter: blur(0px); }
+            50% { transform: translateX(-50%) scale(1.15); opacity: 0.5; filter: drop-shadow(0 0 8px var(--primary)); }
+        }
+
+        .top-social-box {
+            max-width: 33%;
+            min-width: 280px;
+            margin: 20px auto 0;
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+        }
+        .btn-top-social {
+            flex: 1;
+            padding: 12px;
+            font-weight: bold;
+            font-size: 0.95rem;
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+        .btn-top-social:hover { 
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+        }
+        .btn-wsp { background-color: rgba(37, 211, 102, 0.2); border-color: var(--whatsapp); color: #fff; }
+        .btn-wsp:hover { background-color: var(--whatsapp); color: #000; }
+        .btn-dsc { background-color: rgba(88, 101, 242, 0.2); border-color: var(--discord); color: #fff; }
+        .btn-dsc:hover { background-color: var(--discord); }
+
+        .section-title {
+            font-size: 1.8rem;
+            margin: 50px 0 20px;
+            color: #fff;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+        .section-title::before, .section-title::after {
+            content: "🔺";
+            font-size: 0.8rem;
+            color: var(--primary);
+        }
+
+        /* 🔮 CONTENEDORES DESLIZABLES (DONADORES Y CREADORES) */
+        .scroll-container {
+            display: flex;
+            gap: 20px;
+            overflow-x: auto;
+            padding: 15px 30px;
+            scroll-snap-type: x mandatory;
+            scrollbar-width: none;
+        }
+        .scroll-container::-webkit-scrollbar { display: none; }
+        
+        .user-card {
+            background-color: var(--card-bg);
+            min-width: 160px;
+            padding: 20px 15px;
+            border-radius: 12px;
+            scroll-snap-align: start;
+            border: 1px solid #1f1f2e;
+            text-decoration: none;
+            color: inherit;
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            position: relative;
+        }
+        .user-card:hover { 
+            transform: translateY(-5px);
+            border-color: var(--primary);
+            box-shadow: 0 0 15px rgba(255,0,51,0.25);
+        }
+        
+        .card-legendary { border-color: rgba(255,170,0,0.3); }
+        .card-epic { border-color: rgba(170,0,170,0.3); }
+        .card-good { border-color: rgba(0,170,170,0.3); }
+
+        .user-card img {
+            width: 75px;
+            height: 75px;
+            border-radius: 8px;
+            margin-bottom: 12px;
+            border: 1px solid rgba(255,255,255,0.1);
+            background-color: #050507;
+        }
+        .user-card .name { font-weight: bold; font-size: 1.05rem; color: #fff; }
+        
+        .rank { font-size: 0.8rem; font-weight: 900; margin-top: 5px; letter-spacing: 1px; }
+        .rank.legendary { color: var(--legendary); }
+        .rank.epic { color: var(--epic); }
+        .rank.good { color: var(--good); }
+
+        .card-creator { min-width: 130px; padding: 15px 10px; }
+        .card-creator img { width: 55px; height: 55px; border-radius: 50%; }
+
+        /* 🔥 BOTONES DE ACCIÓN CON ANIMACIONES DE FUEGO Y OCULTISMO */
+        .btn-section {
+            display: inline-block;
+            padding: 16px 30px;
+            font-weight: bold;
+            font-size: 1.05rem;
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            margin: 12px 0;
+            cursor: pointer;
+            width: 85%;
+            max-width: 500px;
+            position: relative;
+            box-sizing: border-box;
+            transition: all 0.4s ease;
+            border: 1px solid transparent;
+            background-color: #0d0d13;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.6);
+        }
+        
+        .btn-kofi { 
+            background: linear-gradient(135deg, #1a080a 0%, #3a000d 100%);
+            border-color: var(--kofi);
+            width: auto; 
+        }
+        .btn-kofi:hover {
+            box-shadow: 0 0 20px rgba(255, 94, 91, 0.4);
+            transform: scale(1.05);
+        }
+
+        /* Botón Aternos */
+        .btn-aternos { 
+            display: block; 
+            margin: 25px auto 12px;
+            border-color: #2196f3;
+            background: linear-gradient(90deg, #071524 0%, #0d0d13 100%);
+        }
+        .btn-aternos:hover {
+            border-color: #64b5f6;
+            box-shadow: 0 0 20px rgba(33, 150, 243, 0.4);
+            transform: translateY(-3px);
+        }
+
+        /* Botón Admin Supremo (Fuego Oscuro Carmesí) */
+        .btn-admin { 
+            display: block; 
+            margin: 12px auto 50px; 
+            border-color: var(--primary);
+            background: linear-gradient(90deg, #200006 0%, #0d0d13 100%);
+            letter-spacing: 0.5px;
+        }
+        .btn-admin:hover {
+            color: #fff;
+            border-color: #ff5577;
+            background: #1a0005;
+            transform: translateY(-4px);
+            box-sizing: border-box;
+            box-shadow: 0 0 25px var(--primary), inset 0 0 10px rgba(255,0,51,0.5);
+        }
+
+        /* 🔺 REJILLA DE PLUGINS ESTILO INFRAMUNDO */
+        .plugin-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 25px;
+        }
+        .plugin-item {
+            background-color: var(--card-bg);
+            padding: 22px;
+            border-radius: 10px;
+            text-decoration: none;
+            color: #ccc;
+            border: 1px solid #181822;
+            text-align: left;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        .plugin-item:hover {
+            border-color: rgba(255, 0, 51, 0.4);
+            transform: translateY(-4px);
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.7);
+            color: #fff;
+        }
+        .plugin-item h4 { 
+            margin: 0 0 10px 0; 
+            color: #fff; 
+            font-size: 1.25rem; 
+            display: flex; 
+            align-items: center; 
+            gap: 8px; 
+            transition: color 0.3s;
+        }
+        .plugin-item:hover h4 {
+            color: var(--primary);
+        }
+        .plugin-item p { margin: 0; font-size: 0.88rem; color: #8f8f9e; line-height: 1.5; }
+    </style>
+</head>
+<body>
+
+    <div class="header-epic">
+        <h1>EVENTSLAND</h1>
+        <div class="top-social-box">
+            <a href="https://chat.whatsapp.com/CjnVqZtmAMGGjBYRZdpnsn" target="_blank" class="btn-top-social btn-wsp">💬 WhatsApp</a>
+            <a href="https://discord.gg/yZdEPf7Qk" target="_blank" class="btn-top-social btn-dsc">🎮 Discord</a>
+        </div>
+    </div>
+
+    <div class="section-title">🔮 Altar de Donadores</div>
+    <div class="scroll-container">
+        <a href="donador1.html" class="user-card card-legendary">
+            <img src="https://minotar.net/helm/Steve/80.png" alt="Legendario">
+            <div class="name">Donador_Top1</div>
+            <div class="rank legendary">👑 LEGENDARIO</div>
+        </a>
+        <a href="donador2.html" class="user-card card-epic">
+            <img src="https://minotar.net/helm/Alex/80.png" alt="Épico">
+            <div class="name">Donador_Top2</div>
+            <div class="rank epic">🔮 ÉPICO</div>
+        </a>
+        <a href="donador3.html" class="user-card card-good">
+            <img src="https://minotar.net/helm/MHF_Steve/80.png" alt="Muy Bueno">
+            <div class="name">Donador_Top3</div>
+            <div class="rank good">🔺 MUY BUENO</div>
+        </a>
+    </div>
+    <div style="margin-top: 10px;">
+        <a href="https://ko-fi.com/eventsland" target="_blank" class="btn-section btn-kofi">☕ Ofrendar en Ko-fi</a>
+    </div>
+
+    <div class="section-title">👁️ Ojos del Reino (Creadores)</div>
+    <div class="scroll-container">
+        <a href="creador1.html" class="user-card card-creator card-good">
+            <img src="https://minotar.net/helm/MHF_Alex/80.png" alt="Creador">
+            <div class="name">Streamer_1</div>
+            <div class="rank good">🎥 CREADOR</div>
+        </a>
+        <a href="creador2.html" class="user-card card-creator card-good">
+            <img src="https://minotar.net/helm/Herobrine/80.png" alt="Creador">
+            <div class="name">YouTuber_2</div>
+            <div class="rank good">🎥 CREADOR</div>
+        </a>
+    </div>
+
+    <div class="section-title">📜 Grimorio y Enlaces</div>
+    <a href="aternos.html" class="btn-section btn-aternos">🖥️ Ritual para encender el servidor tú mismo</a>
+    <a href="admin.html" class="btn-section btn-admin">👁️ Ver el expediente de destruyealmas35 (Admin Supremo)</a>
+
+    <div class="section-title">🔮 Conocimiento Prohibido (Plugins)</div>
+    <div class="plugin-grid">
+        <a href="auraskills.html" class="plugin-item">
+            <h4>📊 AuraSkills</h4>
+            <p>Sistema RPG de habilidades (Minería, Combate, Forja). Sube de nivel realizando acciones y desbloquea mejoras estadísticas pasivas permanentes y poderes activos.</p>
+        </a>
+        <a href="bloodmoon.html" class="plugin-item">
+            <h4>🌙 Blood Moon</h4>
+            <p>Noches especiales aleatorias donde los monstruos adquieren fuerza masiva y efectos avanzados, pero otorgan recompensas personalizadas y multiplicadas.</p>
+        </a>
+        <a href="bottledexp.html" class="plugin-item">
+            <h4>🧪 Bottled Exp</h4>
+            <p>Seguridad para tu progreso. Transfiere tus niveles de experiencia acumulados hacia botellas físicas de cristal para comerciar o evitar perderlos al morir.</p>
+        </a>
+        <a href="brewery.html" class="plugin-item">
+            <h4>🍺 Brewery</h4>
+            <p>Sistema completo y realista de destilación de bebidas. Fermenta en calderos, purifica mediante alambiques y añeja el resultado en barriles de madera.</p>
+        </a>
+        <a href="crazyenchantments.html" class="plugin-item">
+            <h4>✨ CrazyEnchantments</h4>
+            <p>Expansión masiva de arsenal. Añade decenas de encantamientos personalizados únicos de categorías especiales (místicos, legendarios) utilizables mediante libros físicos.</p>
+        </a>
+        <a href="excellentcrates.html" class="plugin-item">
+            <h4>🎁 ExcellentCrates</h4>
+            <p>Cajas de botín distribuidas en el spawn. Requieren llaves virtuales o físicas obtenidas en eventos y sorteos para desbloquear equipamiento, dinero o ventajas.</p>
+        </a>
+        <a href="griefprevention.html" class="plugin-item">
+            <h4>🛡️ GriefPrevention</h4>
+            <p>Protección contra robos y grifos. Utiliza una pala de oro para delimitar áreas cúbicas privadas e impedir modificaciones o aperturas de cofres no autorizadas.</p>
+        </a>
+        <a href="jobs.html" class="plugin-item">
+            <h4>💼 Jobs Reborn</h4>
+            <p>Economía laboral activa. Elige empleos (Minero, Leñador, Constructor) y genera ingresos estables en dinero y puntos cada vez que realices tareas profesionales.</p>
+        </a>
+        <a href="mypet.html" class="plugin-item">
+            <h4>🐾 MyPet</h4>
+            <p>Sistema avanzado de mascotas compañeras. Domestica prácticamente cualquier criatura del juego, equípale mochilas, súbela de nivel y asígnale árboles de combate.</p>
+        </a>
+        <a href="realscoreboard.html" class="plugin-item">
+            <h4>📈 RealScoreboard</h4>
+            <p>Marcador informativo estético lateral en pantalla. Monitorea de manera limpia estadísticas en vivo como tu dinero actual, rango asignado y usuarios online.</p>
+        </a>
+        <a href="sethome.html" class="plugin-item">
+            <h4>🏠 SetHome</h4>
+            <p>Gestión de ubicaciones residenciales. Guarda las coordenadas exactas de tus bases y viaja instantáneamente de regreso eliminando las caminatas peligrosas.</p>
+        </a>
+        <a href="shopkeepers.html" class="plugin-item">
+            <h4>🛒 Shopkeepers</h4>
+            <p>Creación de economía local de intercambio. Permite fundar comerciantes interactivos fijando las divisas requeridas y los objetos exactos a la venta.</p>
+        </a>
+        <a href="simpletpa.html" class="plugin-item">
+            <h4>🚀 SimpleTpa</h4>
+            <p>Teletransportación directa entre la comunidad. Envía peticiones de traslado inmediato hacia tus amigos o invítalos a aparecer de manera segura junto a ti.</p>
+        </a>
+        <a href="skinsrestorer.html" class="plugin-item">
+            <h4>🎭 SkinsRestorer</h4>
+            <p>Personalización de skins para cuentas no-premium. Cambia tu aspecto visual libremente usando nombres de usuarios premium oficiales de Mojang o URLs externas.</p>
+        </a>
+        <a href="theosiseconomy.html" class="plugin-item">
+            <h4>🪙 TheosisEconomy</h4>
+            <p>Núcleo financiero bancario del servidor. Gestiona transacciones de dinero digital, consulta balances personales y realiza transferencias inmediatas de fondos.</p>
+        </a>
+        <a href="ultimatefood.html" class="plugin-item">
+            <h4>🍎 UltimateFood</h4>
+            <p>Mecánica realista de supervivencia nutricional. Introduce nuevos alimentos artesanales complejos y un sistema de control estomacal con efectos de estado.</p>
+        </a>
+    </div>
+
+</body>
+</html>

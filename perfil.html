@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Perfil del Miembro - EVENTSLAND</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Roboto, Arial, sans-serif;
+            background-color: #0f0f12;
+            color: #e0e0e0;
+            padding: 30px 20px;
+            text-align: center;
+            margin: 0;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: #16161f;
+            padding: 30px;
+            border-radius: 12px;
+            border: 1px solid #222;
+            text-align: left;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.5);
+        }
+        .btn-volver {
+            display: inline-block;
+            padding: 10px 15px;
+            background-color: #333;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 5px;
+            margin-bottom: 25px;
+            font-weight: bold;
+        }
+        .btn-volver:hover { background-color: #444; }
+        
+        .avatar-flex {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            border-bottom: 1px solid #2a2a35;
+            padding-bottom: 20px;
+            margin-bottom: 25px;
+        }
+        .avatar {
+            width: 90px;
+            height: 90px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid #ffaa00;
+            background-color: #222;
+        }
+        h1 { margin: 0; color: #fff; font-size: 1.8rem; }
+        
+        .info-group {
+            margin-bottom: 18px;
+        }
+        .info-label {
+            font-weight: bold;
+            color: #ffaa00;
+            text-transform: uppercase;
+            font-size: 0.85rem;
+            letter-spacing: 1px;
+            margin-bottom: 4px;
+        }
+        .info-value {
+            font-size: 1.05rem;
+            color: #b5b5b5;
+            line-height: 1.5;
+        }
+        .error-msg {
+            color: #ff3333;
+            text-align: center;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <a href="index.html" class="btn-volver">← Volver al Inicio</a>
+        
+        <div id="content-area">
+            <p>Cargando datos místicos...</p>
+        </div>
+    </div>
+
+    <script>
+        // Función para resolver la URL de la foto automáticamente si es YouTube
+        function getAvatarUrl(item, tipo) {
+            if (tipo === 'creadores' && item.red_social_link) {
+                if (item.red_social_link.includes('youtube.com/')) {
+                    // Intenta extraer el usuario (@usuario)
+                    const match = item.red_social_link.match(/@([\w.-]+)/);
+                    if (match && match[1]) {
+                        return `https://img.youtube.com/vi/placeholder/0.jpg`; 
+                        // Alternativa nativa sin API pesada: Usar la arquitectura desatendida de avatares de YouTube
+                        return `https://open.tube/api/v1/accounts/${match[1]}/avatar`;
+                    }
+                }
+                // Si no se puede extraer, un avatar genérico de creador
+                return "https://minotar.net/helm/MHF_YouTube/90.png";
+            }
+            // Para donadores usa su link directo cargado en el JSON
+            return item.foto_link || "https://minotar.net/helm/Steve/90.png";
+        }
+
+        async function cargarPerfil() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const tipo = urlParams.get('tipo'); // 'creadores' o 'donadores'
+            const id = urlParams.get('id');     // ID del usuario
+
+            const contentArea = document.getElementById('content-area');
+
+            if (!tipo || !id) {
+                contentArea.innerHTML = `<p class="error-msg">Error: Faltan parámetros de invocación.</p>`;
+                return;
+            }
+
+            try {
+                // Buscamos el JSON local
+                const response = await fetch('datos.json');
+                const data = await response.getAvatar || await response.json();
+                
+                const lista = data[tipo];
+                const usuario = lista.find(u => u.id === id);
+
+                if (!usuario) {
+                    contentArea.innerHTML = `<p class="error-msg">Perfil no encontrado en el reino.</p>`;
+                    return;
+                }
+
+                let htmlContent = '';
+                const finalPhoto = getAvatarUrl(usuario, tipo);
+
+                if (tipo === 'creadores') {
+                    htmlContent = `
+                        <div class="avatar-flex">
+                            <img src="${finalPhoto}" class="avatar" alt="Avatar">
+                            <div>
+                                <h1>${usuario.nombre}</h1>
+                                <p style="margin:5px 0 0 0; color:#aaa;">Creador de Contenido</p>
+                            </div>
+                        </div>
+                        <div class="info-group">
+                            <div class="info-label">🎥 Dónde verlo</div>
+                            <div class="info-value"><a href="${usuario.red_social_link}" target="_blank" style="color:#2196f3; text-decoration:none; font-weight:bold;">${usuario.donde_verlo}</a></div>
+                        </div>
+                        <div class="info-group">
+                            <div class="info-label">📜 Biografía</div>
+                            <div class="info-value">${usuario.biografia}</div>
+                        </div>
+                        <div class="info-group">
+                            <div class="info-label">👑 Rango en el Servidor</div>
+                            <div class="info-value">${usuario.rango_server}</div>
+                        </div>
+                        <div class="info-group">
+                            <div class="info-label">💬 Rango en el Grupo</div>
+                            <div class="info-value">${usuario.rango_grupo}</div>
+                        </div>
+                        <div class="info-group">
+                            <div class="info-label">💎 Rango de Donador</div>
+                            <div class="info-value">${usuario.rango_donador}</div>
+                        </div>
+                        <div class="info-group">
+                            <div class="info-label">ℹ️ Información Extra</div>
+                            <div class="info-value">${usuario.info_extra}</div>
+                        </div>
+                    `;
+                } else if (tipo === 'donadores') {
+                    htmlContent = `
+                        <div class="avatar-flex">
+                            <img src="${finalPhoto}" class="avatar" alt="Avatar">
+                            <div>
+                                <h1>${usuario.nombre}</h1>
+                                <p style="margin:5px 0 0 0; color:#4CAF50;">Donador del Reino</p>
+                            </div>
+                        </div>
+                        <div class="info-group">
+                            <div class="info-label">👤 Nombre / Nickname</div>
+                            <div class="info-value">${usuario.nombre}</div>
+                        </div>
+                        <div class="info-group">
+                            <div class="info-label">📜 Biografía</div>
+                            <div class="info-value">${usuario.biografia}</div>
+                        </div>
+                        <div class="info-group">
+                            <div class="info-label">🔗 Links de contacto</div>
+                            <div class="info-value">${usuario.links}</div>
+                        </div>
+                        <div class="info-group">
+                            <div class="info-label">ℹ️ Información Extra</div>
+                            <div class="info-value">${usuario.info_extra}</div>
+                        </div>
+                    `;
+                }
+
+                contentArea.innerHTML = htmlContent;
+
+            } catch (error) {
+                console.error(error);
+                contentArea.innerHTML = `<p class="error-msg">Error al conectar con la base de datos JSON.</p>`;
+            }
+        }
+
+        window.onload = cargarPerfil;
+    </script>
+</body>
+</html>

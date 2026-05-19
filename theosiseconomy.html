@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TheosisEconomy - Comandos</title>
+    <style>
+        body { font-family: sans-serif; background-color: #0f0f12; color: #e0e0e0; padding: 20px; }
+        .btn-volver { display: inline-block; padding: 10px 15px; background-color: #333; color: #fff; text-decoration: none; border-radius: 5px; margin-bottom: 20px; }
+        h1 { color: #ffc107; }
+        table { width: 100%; border-collapse: collapse; margin-top: 20px; background-color: #16161f; }
+        th, td { padding: 12px; text-align: left; border-bottom: 1px solid #333; }
+        th { background-color: #ffc107; color: black; font-weight: bold; }
+        code { color: #ffaa00; }
+    </style>
+</head>
+<body>
+    <a href="index.html" class="btn-volver">← Volver al Inicio</a>
+    <h1>🪙 TheosisEconomy</h1>
+    <p>El sistema económico del servidor. Permite administrar tu dinero, ver balances y transferir fondos entre jugadores.</p>
+    
+    <h2>Lista de Comandos</h2>
+    <table>
+        <tr><th>Comando</th><th>Descripción Breve</th></tr>
+        <tr><td><code>/balance</code> o <code>/bal</code></td><td>Muestra la cantidad de dinero actual que posees en tu cuenta bancaria.</td></tr>
+        <tr><td><code>/bal [jugador]</code></td><td>Ver la cantidad de dinero que tiene otro usuario del servidor.</td></tr>
+        <tr><td><code>/pay [jugador] [cant]</code></td><td>Envía y transfiere una cantidad de tu dinero directamente a otro jugador.</td></tr>
+        <tr><td><code>/balancetop</code> o <code>/baltop</code></td><td>Muestra la lista de los jugadores más ricos de todo el servidor.</td></tr>
+        <tr><td><code>/eco give [jugador] [cant]</code></td><td>(Admin) Añade dinero de la nada directamente al saldo de un usuario.</td></tr>
+        <tr><td><code>/eco take [jugador] [cant]</code></td><td>(Admin) Quita o confisca una cantidad de dinero del saldo de alguien.</td></tr>
+        <tr><td><code>/eco set [jugador] [cant]</code></td><td>(Admin) Establece el dinero exacto de un jugador a la cantidad fijada.</td></tr>
+        <tr><td><code>/eco reset [jugador]</code></td><td>(Admin) Reinicia la cuenta de un jugador al balance inicial predeterminado.</td></tr>
+        <tr><td><code>/theosiseconomy reload</code></td><td>(Admin) Recarga los archivos de configuración y monedas del servidor.</td></tr>
+    </table>
+</body>
+</html>
